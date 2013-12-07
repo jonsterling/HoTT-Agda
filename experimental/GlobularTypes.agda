@@ -33,6 +33,11 @@ Idω : ∀ {i} (A : Type i) → Glob i
 Ob (Idω A) = A
 Hom (Idω A) a b = Idω (a == b)
 
+{- Functions between types are functorial up the entire tower of identities. -}
+apω : {i : ULevel} {A B : Type i} {a b : A} (f : A → B) → Glob→ i (Hom (Idω A) a b) (Hom (Idω B) (f a) (f b))
+Ob→ (apω f) = ap f
+Hom→ (apω f) = λ p q → apω (ap f)
+
 {- Bisimulation between globular types -}
 record _~_ {i} (G H : Glob i) : Type (lsuc i) where
   coinductive
