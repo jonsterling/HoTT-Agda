@@ -38,6 +38,18 @@ apω : {i : ULevel} {A B : Type i} {a b : A} (f : A → B) → Glob→ i (Hom (I
 Ob→ (apω f) = ap f
 Hom→ (apω f) = λ p q → apω (ap f)
 
+{- Build up a tower of functoriality proofs for any function -}
+nimrod : {i : ULevel} {A B : Type i} (f : A → B) → Glob→ i (Idω A) (Idω B)
+Ob→ (nimrod f) = f
+Hom→ (nimrod f) a b = apω f
+
+{- An example -}
+Bool′ : Glob lzero
+Bool′ = Idω Bool
+
+not′ : Glob→ lzero Bool′ Bool′
+not′ = nimrod (λ { true → false; false → true })
+
 {- Bisimulation between globular types -}
 record _~_ {i} (G H : Glob i) : Type (lsuc i) where
   coinductive
