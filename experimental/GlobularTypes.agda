@@ -14,6 +14,15 @@ record Glob (i : ULevel) : Type (lsucc i) where
     Hom : (a b : Ob) → Glob i
 open Glob public
 
+{- Morphisms between globular types -}
+record Glob→ (i : ULevel) (A B : Glob i) : Type (lsucc i) where
+  coinductive
+  constructor glob→
+  field
+    Ob→ : Ob A → Ob B
+    Hom→ : (a b : Ob A) → Glob→ i (Hom A a b) (Hom B (Ob→ a) (Ob→ b))
+open Glob→ public
+
 {- The terminal globular type -}
 Unit-glob : Glob lzero
 Ob Unit-glob = Unit
