@@ -29,9 +29,9 @@ Ob Unit-glob = Unit
 Hom Unit-glob _ _ = Unit-glob
 
 {- The tower of identity types -}
-Id-glob : ∀ {i} (A : Type i) → Glob i
-Ob (Id-glob A) = A
-Hom (Id-glob A) a b = Id-glob (a == b)
+Idω : ∀ {i} (A : Type i) → Glob i
+Ob (Idω A) = A
+Hom (Idω A) a b = Idω (a == b)
 
 {- Bisimulation between globular types -}
 record _~_ {i} (G H : Glob i) : Type (lsuc i) where
